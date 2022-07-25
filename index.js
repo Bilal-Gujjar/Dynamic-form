@@ -52,23 +52,23 @@ function valid() {
         var phone_error = document.getElementById('ys' + i)
         var address_error = document.getElementById('ts' + i)
         if (name == "") {
-            name_error.innerHTML = "*Car Name is required"
+            name_error.innerHTML = "****Car Name is required****"
         } else {
             name_error.innerHTML = ""
         }
         if (email == "") {
-            email_error.innerHTML = "*Model is missing"
+            email_error.innerHTML = "***Model is missing****"
         } else {
             email_error.innerHTML = ""
         }
         if (phone == "") {
-            phone_error.innerHTML = "*Phone is required"
+            phone_error.innerHTML = "****Phone is required****"
 
         } else {
             phone_error.innerHTML = ""
         }
         if (address == "") {
-            address_error.innerHTML = "Address is required"
+            address_error.innerHTML = "****Address is required****"
         } else {
             address_error.innerHTML = ""
         }
@@ -96,6 +96,7 @@ function submit() {
         }
         localStorage.setItem("MultiFormData", JSON.stringify(data));
         alert("Data Saved")
+        
     }
     
 
