@@ -12,24 +12,26 @@ function addNewForm() {
                 <input id = "phone`+ count + `"   type="text" name="phone" placeholder="Year">
                 <label> Car Milage</label>
                 <input id = "address`+ count + `"   type="text" name="address" placeholder="Mileage">
-                <input id = "delete`+ count + `"   type="button" value="Delete" onclick="removeNewField()">
+                <input id = "deleted`+ count + `"   type="button" value="Delete" onclick="removeNewField(event)">
                 </form>
         `
     var form = document.getElementById('car-form')
     form.innerHTML += html
-    console.log(form);
-    console.log(count);
+   // console.log(form);
+    //console.log(count);
 }
 var yy = document.getElementById("car-form");
 console.log(yy);
-//Remove the form field dynamically 
+//onclick function to remove form field 
 function removeNewField() {
-    var form = document.getElementById('car-form')
-    form.removeChild(document.getElementById('fn' + count))
-    count -= 1
-    console.log(form);
-    console.log(count);
+    var id = event.target.id
+    console.log(id)
+    var id = id.substring(7, id.length)
+    console.log(id);
+    var form = document.getElementById('fn' + id)
+    form.remove()
 }
+//onclick function to remove form field
 var data = []
 function submit() {
     for (var i = 1; i <= count; i++) {
@@ -66,7 +68,9 @@ function submit() {
 }
 
 //onsubmit prevent default
-document.querySelector("#ck").addEventListener("click", (e) => {
-    e.preventDefault();
+// document.querySelector("#ck").addEventListener("click", (e) => {
+//     e.preventDefault();
 
-}, false);
+// }, false);
+
+//Remove the form field dynamically by using Id number
