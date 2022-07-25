@@ -6,12 +6,16 @@ function addNewForm() {
                 <h1> Car`+ count + ` </h1>
                 <label> Car Name</label>
                 <input id = "name`+ count + `"   type="text" name="name" placeholder="CarName">
+                <span id = "ns`+count+`"></span>
                 <label> Car Model</label>
                 <input id = "email`+ count + `"   type="text" name="email" placeholder="Model">
+                <span id = "ms`+count+`"></span>
                 <label> Car Price</label>
                 <input id = "phone`+ count + `"   type="text" name="phone" placeholder="Year">
+                <span id = "ys`+count+`"></span>
                 <label> Car Milage</label>
                 <input id = "address`+ count + `"   type="text" name="address" placeholder="Mileage">
+                <span id = "ts`+count+`"></span>
                 <input id = "deleted`+ count + `"   type="button" value="Delete" onclick="removeNewField(event)">
                 </form>
         `
@@ -31,46 +35,72 @@ function removeNewField() {
     var form = document.getElementById('fn' + id)
     form.remove()
 }
-//onclick function to remove form field
+
 var data = []
-function submit() {
+
+
+
+function valid() {
+    //dynamic form validation and error message in span tag
     for (var i = 1; i <= count; i++) {
         var name = document.getElementById('name' + i).value
-        if (name == "") {
-            alert("name is empty no " + i);
-            return false
-        }
         var email = document.getElementById('email' + i).value
-        if (email == "") {
-            alert("Please enter email" )
-            return false
-        }
         var phone = document.getElementById('phone' + i).value
-        if (phone == "") {
-            alert("Please enter phone")
-            return false
-        }
         var address = document.getElementById('address' + i).value
-        if (address == "") {
-            alert("Please enter address")
-            return false
+        var name_error = document.getElementById('ns' + i)
+        var email_error = document.getElementById('ms' + i)
+        var phone_error = document.getElementById('ys' + i)
+        var address_error = document.getElementById('ts' + i)
+        if (name == "") {
+            name_error.innerHTML = "*Car Name is required"
+        } else {
+            name_error.innerHTML = ""
         }
-        var obj = { name, email, phone, address }
-        data.push(obj)
-        if (name, email, phone, address == false) {
+        if (email == "") {
+            email_error.innerHTML = "*Model is missing"
+        } else {
+            email_error.innerHTML = ""
+        }
+        if (phone == "") {
+            phone_error.innerHTML = "*Phone is required"
 
+        } else {
+            phone_error.innerHTML = ""
+        }
+        if (address == "") {
+            address_error.innerHTML = "Address is required"
+        } else {
+            address_error.innerHTML = ""
+        }
+    }
+    if (name == "" || email == "" || phone == "" || address == "") {
+        return false
+    } else {
+        return true
+    }
+}
+
+
+
+
+
+function submit() {
+    if (valid() == true) {
+        for (var i = 1; i <= count; i++) {
+            var name = document.getElementById('name' + i).value
+            var email = document.getElementById('email' + i).value
+            var phone = document.getElementById('phone' + i).value
+            var address = document.getElementById('address' + i).value
+            var obj = { name, email, phone, address }
+            data.push(obj)
         }
         localStorage.setItem("MultiFormData", JSON.stringify(data));
-
+        alert("Data Saved")
     }
-
+    
 
 }
 
-//onsubmit prevent default
-// document.querySelector("#ck").addEventListener("click", (e) => {
-//     e.preventDefault();
 
-// }, false);
 
-//Remove the form field dynamically by using Id number
+//after all validation before submit
